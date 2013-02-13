@@ -1,7 +1,7 @@
 
-function [ALL, DATA, S, avg_Prob_xy, avg_Prob_sd, avg_total_st, k1] = main(noOfAgents, gridSize)
+function [ALL, DATA, S, avg_Prob_xy, avg_Prob_sd, avg_total_st, k1] = main(noOfAgents, gridSize, laps)
 
-lap = 10;
+lap = laps;
 cntAgents = noOfAgents;
 % create a 3-d array
 ALL = zeros(cntAgents,4,lap);
@@ -39,8 +39,8 @@ for i = 2:lap
     %direction  (0 to 360)
     %x1 = x + st*cos(d), y1 = y+st*sin(d)
      for j = 1:cntAgents
-        CA(j, 1) = PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4));
-        CA(j, 2) = PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4));        
+        CA(j, 1) = round(PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4)));
+        CA(j, 2) = round(PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4)));        
     end
     
     ALL(:,:,i) = CA;
