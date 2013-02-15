@@ -1,4 +1,4 @@
-function PlotXYLocationsWithSuspeciousAgents(ALL, S, gridSize)
+function PlotXYLocationsWithSuspeciousAgents(ALL, S, gridSize, side)
 
 figure;
 for i = 1:1
@@ -9,16 +9,16 @@ end
 
 hold on;
 %Draw vertical lines
-y = 1:300;
-for i = 1:(300/gridSize)
+y = 1:side;
+for i = 1:(side/gridSize)
     x = gridSize * i;
     plot(x, y, '-black');
 end
 
 hold on;
 %Draw horizontal lines
-x = 1:300;
-for i = 1:(300/gridSize)
+x = 1:side;
+for i = 1:(side/gridSize)
     y = gridSize * i;
     plot(x, y, '-black');
 end

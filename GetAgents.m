@@ -1,10 +1,11 @@
 %This function creates an array with 4 columns X,Y,S,and D.
 %It uses the functions L,D,and S for creating the rows
-function w=GetAgents(N)
+function w=GetAgents(N, side)
 
-L=GetAgentLocations(N);
+L=GetAgentLocations(N, side);
 D=GetDirections(N);
 S=GetSpeeds(N);
+
 %truncate speed to get only one digit after the decimal place 
 for i = 1:length(S)
     X = num2str(S(i), 2);

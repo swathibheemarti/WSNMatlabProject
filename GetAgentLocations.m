@@ -1,9 +1,9 @@
-function l=GetAgentLocations(N)
+function l=GetAgentLocations(N, side)
 %This function generates N random (x,y) coordinates where x and y range
 %from 0 to 300
 
 
-lHi = 300;
+lHi = side;
 rand('seed',192);
 X = randi([0,lHi],[N,1]);
 Y = randi([0,lHi],[N,1]);

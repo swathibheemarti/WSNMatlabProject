@@ -1,7 +1,6 @@
 
-function [ALL, DATA, S, avg_Prob_xy, avg_Prob_sd, avg_total_st, k1] = main(noOfAgents, gridSize, laps)
+function [ALL, DATA, S, avg_Prob_xy, avg_Prob_sd, avg_total_st, k1] = main(noOfAgents, gridSize, lap, side)
 
-lap = laps;
 cntAgents = noOfAgents;
 % create a 3-d array
 ALL = zeros(cntAgents,4,lap);
@@ -10,7 +9,7 @@ ALL = zeros(cntAgents,4,lap);
 DATA = zeros(cntAgents * lap, 11);
 
 % array for agents
-FA = GetAgents(cntAgents);
+FA = GetAgents(cntAgents, side);
 
 %populate third dimension of ALL with first generated array of agents
 ALL(:,:,1) = FA;
@@ -30,7 +29,7 @@ for i = 2:lap
     % the randomly generated (x,y) but calculate it based on the time,
     % speed and direction, so todo: change GetAgents to generate (x,y) only
     % first time i.e., t = 0;
-    CA = GetAgents(cntAgents);
+    CA = GetAgents(cntAgents, side);
     %needed for populating CA
     PA = ALL(:,:,i-1);
     
@@ -39,8 +38,21 @@ for i = 2:lap
     %direction  (0 to 360)
     %x1 = x + st*cos(d), y1 = y+st*sin(d)
      for j = 1:cntAgents
+         
         CA(j, 1) = round(PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4)));
-        CA(j, 2) = round(PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4)));        
+        
+        %If location exceeds observation area, reset it to start location
+        if(CA(j, 1) > side || CA(j, 1) < 0)
+            CA(j, 1) = 0;                
+        end
+        
+        CA(j, 2) = round(PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4)));  
+        
+        %If location exceeds observation area, reset it to start location
+        if(CA(j, 2) > side || CA(j, 2) < 0)
+            CA(j, 2) = side / 2;                
+        end
+        
     end
     
     ALL(:,:,i) = CA;
@@ -80,28 +92,28 @@ PlotALLAgents(ALL, S(1, :));
 %plot a graph with all agents at t = 1, ordinary agents with blue and
 %suspicious agents with red
 %BEGIN FIGURE 2
-PlotXYLocationsWithSuspeciousAgents(ALL, S(1, :), gridSize);
+PlotXYLocationsWithSuspeciousAgents(ALL, S(1, :), gridSize, side);
 %END FIGURE 2
 
 %Find probability p(x,y) of each grid
 %prob_xy initializes all prob(x,y) of each grid to 0
-%prob_xy [300/gridSize, 300/gridSize]
+%prob_xy [side/gridSize, side/gridSize]
 %st_xy initializes all st for each grid to 0
-%st_xy [300/gridSize, 300/gridSize]
-prob_xy = zeros((300/gridSize), (300/gridSize), lap);
-st_xy = zeros((300/gridSize), (300/gridSize), lap);
+%st_xy [side/gridSize, side/gridSize]
+prob_xy = zeros((side/gridSize), (side/gridSize), lap);
+st_xy = zeros((side/gridSize), (side/gridSize), lap);
 
 avg_Prob_xy = zeros(lap);
 avg_St_xy = zeros(lap);
 
 for z = 1:lap    
     %Looping from Bottom Grid to Top Grid
-    for i = 1:(300/gridSize)
+    for i = 1:(side/gridSize)
         ymin = (i - 1) * gridSize;
         ymax = (i) * gridSize;
 
         %For each vertical grid, loop from left to right on x-axis
-        for j = 1:(300/gridSize)
+        for j = 1:(side/gridSize)
             xmin = (j - 1) * gridSize;
             xmax = (j) * gridSize;
 
