@@ -1,6 +1,6 @@
 function x = LeastOccuringDirections(A)
 %This function searches for agents whose speeds are among the least
-%occuring speeds on both sides of the mean. 
+%occurring speeds on both sides of the mean. 
 
 D = A(:, 4);%get the directions from A
 UD = unique(D);%get the unique values for direction
