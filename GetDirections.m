@@ -7,7 +7,7 @@ function d=GetDirections(N)
 %deviation.
 
 dLo=0;
-dHi=360;
+dHi=15;
 mu=0.0;
 std=0.00;
 

@@ -37,22 +37,16 @@ for i = 2:lap
     %where s is speed (3.5 to 4.5)  t is time interval which is 1, and d is the
     %direction  (0 to 360)
     %x1 = x + st*cos(d), y1 = y+st*sin(d)
-     for j = 1:cntAgents
-         
-        CA(j, 1) = round(PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4)));
+    for j = 1:cntAgents
         
-        %If location exceeds observation area, reset it to start location
-        if(CA(j, 1) > side || CA(j, 1) < 0)
-            CA(j, 1) = 0;                
-        end
-        
-        CA(j, 2) = round(PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4)));  
-        
-        %If location exceeds observation area, reset it to start location
-        if(CA(j, 2) > side || CA(j, 2) < 0)
-            CA(j, 2) = side / 2;                
-        end
-        
+       if j <= cntAgents/2
+           CA(j, 1) = round(PA(j, 1) + randi(10, 1, 1));
+           CA(j, 2) = round(PA(j, 2) + randi(2, 1, 1));
+       else
+           CA(j, 1) = round(PA(j, 1) - randi(10, 1, 1));
+           CA(j, 2) = round(PA(j, 2) - randi(2, 1, 1));
+       end
+       
     end
     
     ALL(:,:,i) = CA;
