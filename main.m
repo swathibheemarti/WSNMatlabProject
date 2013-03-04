@@ -46,24 +46,12 @@ for i = 2:lap
     %x1 = x + st*cos(d), y1 = y+st*sin(d)
     for j = 1:cntAgents
         
-        if j <= cntAgents
-            CA(j, 1) = round(PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4)));                          
+        if j <= cntAgents / 2
+            CA(j, 1) = PA(j, 1) + randi(10);   %round(PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4)));        
+            CA(j, 2) = PA(j, 2) + randi(2);
         else
-            CA(j, 1) = round(PA(j, 1) - PA(j, 3) * 1 * cos(PA(j, 4)));              
-        end
-        
-        if CA(j, 1) <= 0 || CA(j, 1) >= side
-            CA(j, 1) = randi([gridSize * 2, side - (gridSize * 2)], 1, 1);
-        end
-           
-        if randi(2,1,1) == 1
-            CA(j, 2) = round(PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4)));
-        else
-            CA(j, 2) = round(PA(j, 2) - PA(j, 3) * 1 * sin(PA(j, 4)));
-        end
-        
-        if CA(j, 2) <= 0 || CA(j, 2) >= side
-            CA(j, 2) = randi([gridSize * 2, side - (gridSize * 2)], 1, 1);
+            CA(j, 1) = PA(j, 1) - randi(10); %round(PA(j, 1) - PA(j, 3) * 1 * cos(PA(j, 4)));              
+            CA(j, 2) = PA(j, 2) - randi(2);
         end
         
     end

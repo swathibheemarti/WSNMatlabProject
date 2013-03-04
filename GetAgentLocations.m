@@ -3,16 +3,16 @@ function l=GetAgentLocations(N, side)
 %from 0 to 300
 
 
-lHi = side;
+%lHi = side;
 
-rng shuffle;
-X = randi([0,lHi],[N,1]);
-rng shuffle;
-Y = randi([0,lHi],[N,1]);
+%rng shuffle;
+%X = randi([0,lHi],[N,1]);
+%rng shuffle;
+%Y = randi([0,lHi],[N,1]);
 
 l = zeros(N,2);%array with 2 columns
 
-for i = 1:N
-    l(i, 1) = X(i);
-    l(i, 2) = Y(i);
+for i = 1:N    
+    l(i, 1) = randi(side);
+    l(i, 2) = randi(side);
 end
