@@ -8,6 +8,8 @@ ALL = zeros(cntAgents,4,lap);
 %Data for exporting to excel
 DATA = zeros(cntAgents * lap, 11);
 
+rng shuffle;
+
 % array for agents
 FA = GetAgents(cntAgents, side);
 
@@ -19,11 +21,16 @@ lapi = 1;
 S = zeros(lap, cntAgents);
 
 CS = SuspiciousAgents(FA);
+
 for i = 1:length(CS)
     S(lapi,i) = CS(1, i);
 end
 
 for i = 2:lap
+    
+    rng shuffle;
+    
+    
     % Todo : GetAgents returns a 500x4 array of form (x, y, s, d) where
     % (x,y) is agent location, s is speed, d is direction, we will not use
     % the randomly generated (x,y) but calculate it based on the time,
@@ -39,14 +46,26 @@ for i = 2:lap
     %x1 = x + st*cos(d), y1 = y+st*sin(d)
     for j = 1:cntAgents
         
-       if j <= cntAgents/2
-           CA(j, 1) = round(PA(j, 1) + randi(10, 1, 1));
-           CA(j, 2) = round(PA(j, 2) + randi(2, 1, 1));
-       else
-           CA(j, 1) = round(PA(j, 1) - randi(10, 1, 1));
-           CA(j, 2) = round(PA(j, 2) - randi(2, 1, 1));
-       end
-       
+        if j <= cntAgents
+            CA(j, 1) = round(PA(j, 1) + PA(j, 3) * 1 * cos(PA(j, 4)));                          
+        else
+            CA(j, 1) = round(PA(j, 1) - PA(j, 3) * 1 * cos(PA(j, 4)));              
+        end
+        
+        if CA(j, 1) <= 0 || CA(j, 1) >= side
+            CA(j, 1) = randi([gridSize * 2, side - (gridSize * 2)], 1, 1);
+        end
+           
+        if randi(2,1,1) == 1
+            CA(j, 2) = round(PA(j, 2) + PA(j, 3) * 1 * sin(PA(j, 4)));
+        else
+            CA(j, 2) = round(PA(j, 2) - PA(j, 3) * 1 * sin(PA(j, 4)));
+        end
+        
+        if CA(j, 2) <= 0 || CA(j, 2) >= side
+            CA(j, 2) = randi([gridSize * 2, side - (gridSize * 2)], 1, 1);
+        end
+        
     end
     
     ALL(:,:,i) = CA;
@@ -70,9 +89,9 @@ for i = 1:lap
         DATA(((i - 1) * cntAgents + j), 6) = i;%lap
         
         if (ismember(j, S(i,:)) == 1)
-            DATA(((i - 1) * cntAgents + j), 11) = 'I';%Suspicious agent
+            DATA(((i - 1) * cntAgents + j), 11) = 1;%Suspicious agent
         else
-            DATA(((i - 1) * cntAgents + j), 11) = 'N';%Ordinary agent
+            DATA(((i - 1) * cntAgents + j), 11) = 0;%Ordinary agent
         end           
     end
 end
@@ -80,7 +99,7 @@ end
 %plot a graph for all the agents and mark the ordinary agents with blue 
 %and suspicious agents in red over time t = 1 to 10
 %BEGIN FIGURE 1
-PlotALLAgents(ALL, S(1, :));
+PlotAllAgents(ALL, S(1, :));
 %END FIGURE 1
 
 %plot a graph with all agents at t = 1, ordinary agents with blue and

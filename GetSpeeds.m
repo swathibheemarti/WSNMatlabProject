@@ -11,14 +11,12 @@ sHi=4.5;
 mu=0.0;
 sigma=0.00;
 
-for i = 1:100
-    R=sLo + (sHi - sLo).*rand(N,1);
-    mu = mu + mean(R);
-    sigma = sigma + std2(R);
-end    
+R=sLo + (sHi - sLo).*rand(N,1);
+mu = mu + mean(R);
+sigma = sigma + std2(R);
 
-mu = mu/100;
-sigma = sigma/100;
+%mu = mu/100;
+%sigma = sigma/100;
 
 %fprintf('\n Mean = %s',mu);
 %fprintf('\n Std Dev = %s',sigma);

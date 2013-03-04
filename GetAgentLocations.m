@@ -4,8 +4,10 @@ function l=GetAgentLocations(N, side)
 
 
 lHi = side;
-rand('seed',192);
+
+rng shuffle;
 X = randi([0,lHi],[N,1]);
+rng shuffle;
 Y = randi([0,lHi],[N,1]);
 
 l = zeros(N,2);%array with 2 columns

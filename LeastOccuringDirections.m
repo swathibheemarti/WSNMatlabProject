@@ -17,12 +17,26 @@ for i = 1:length(UD)
     end
     NUD(i, 2) = times;
 end
+
 %array with sorted occurrences of direction
 NUD1 = sortrows(NUD, 2);
-LUD = NUD1(1, 2);
+%Top 3 Least occuring times is grabbed so we can get the directions that fall into
+%this many times
+
+if length(NUD1) > 2
+    LUD = NUD1([1,2,3], 2);
+end
+
+if length(NUD1) > 1
+    LUD = NUD1([1,2], 2);
+end
+
+if length(NUD1) > 1
+    LUD = NUD1(1, 2);
+end
 
 for i = 1:length(NUD1)
-    if NUD1(i, 2) == LUD
+    if ismember(NUD1(i, 2), LUD) == 1
         x(i) = NUD1(i, 1);
     end
 end

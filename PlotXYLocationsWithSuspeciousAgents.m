@@ -1,7 +1,10 @@
 function PlotXYLocationsWithSuspeciousAgents(ALL, S, gridSize, side)
 
+A = size(ALL);
+laps = A(3);
+
 figure;
-for i = 1:1
+for i = 1:laps
     plot(ALL(:,1,i),ALL(:,2,i),'.');
     hold on;
     plot(ALL(S(find(S)),1,i),ALL(S(find(S)),2,i),'r.');
