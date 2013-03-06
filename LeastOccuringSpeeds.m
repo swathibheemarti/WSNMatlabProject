@@ -30,13 +30,9 @@ NUS1 = sortrows(NUS, 2);
 
 if length(NUS1) > 2
     LUS = NUS1([1,2,3], 2);
-end
-
-if length(NUS1) > 1
+elseif length(NUS1) > 1
     LUS = NUS1([1,2], 2);
-end
-
-if length(NUS1) > 1
+else 
     LUS = NUS1(1, 2);
 end
 

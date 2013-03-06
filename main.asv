@@ -47,12 +47,8 @@ for i = 2:lap
     for j = 1:cntAgents
         
         if j <= round(cntAgents/2)
-            CA(j, 1) = PA(j, 1) + round(PA(j, 3) * 1 * cos(PA(j, 4)));
-            CA(j, 2) = PA(j, 2) + round(PA(j, 3) * 1 * sin(PA(j, 4)));
-        else
-            CA(j, 1) = PA(j, 1) - round(PA(j, 3) * 1 * cos(PA(j, 4)));
-            CA(j, 2) = PA(j, 2) - round(PA(j, 3) * 1 * sin(PA(j, 4)));
-        end 
+        CA(j, 1) = PA(j, 1) + round(PA(j, 3) * 1 * cos(PA(j, 4)));
+        CA(j, 2) = PA(j, 2) + round(PA(j, 3) * 1 * sin(PA(j, 4)));
         
     end
     
@@ -72,9 +68,9 @@ end
 DATA = ConvertAgentsToTwoDimArray(ALL, S, lap, cntAgents);
 
 %plot a graph for all the agents and mark the ordinary agents with blue 
-%and suspicious agents in red over time t = 1 to lap
+%and suspicious agents in red over time t = 1 to 10
 %BEGIN FIGURE 1
-%                                                PlotAllAgents(ALL, S, lap);
+PlotAllAgents(ALL, S(1, :));
 %END FIGURE 1
 
 %plot a graph with all agents at t = 1, ordinary agents with blue and

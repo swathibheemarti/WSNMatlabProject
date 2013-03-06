@@ -12,15 +12,11 @@ for i = 1:length(S)
     S(i) = str2double(X);
 end
 
-%truncate direction to get only whole numbers
-%for i = 1:length(D)
-%    X = num2str(D(i),(strfind(num2str(D(i)),'.')-1));%
-%    D(i) = str2double(X);
-%end
-
+%Truncate the decimal part convert to int
 D = int32(D);
 
-w=zeros(N,4);%array of agents with 4 columns
+%array of agents with 4 columns
+w=zeros(N,4);
 
 for i = 1:N
     w(i,1) = L(i,1);

@@ -2,12 +2,10 @@ function PlotSpeedAlongWithSuspeciousSpeeds(ALL, S, sdGridSize)
 
 figure;
 %Scaling speed from 3.5 to 4.5 to 0 to 1 (S - 3.5)
-%Scaling direction from 0 to 360 to 0 to 1 (D / 360)
-plot(ALL(:,3,1)-3.5,ALL(:,4,1)/360,'.');
+%Scaling direction from 0 to 10 to 0 to 1 (D / 10)
+plot(ALL(:,3,1)-3.5,ALL(:,4,1)/10,'.');
 hold on
-plot(ALL(S(find(S)),3,1)-3.5,ALL(S(find(S)),4,1)/360,'r.');
-
-
+plot(ALL(S(1,find(S(1,:))), 3, 1)-3.5,ALL(S(1,find(S(1,:))), 4, 1)/10,'r.');
 
 hold on;
 %Draw vertical lines

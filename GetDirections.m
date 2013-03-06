@@ -7,19 +7,12 @@ function d=GetDirections(N)
 %deviation.
 
 dLo=0;
-dHi=30;
+dHi=10;
 mu=0.0;
 std=0.00;
 
 R = dLo + (dHi - dLo).*rand(N,1);
 mu = mu + mean(R);
 std = std + std2(R);
-
-%mu = mu/100;
-%std = std/100;
-
-%fprintf('\n Mean = %s',mu);
-%fprintf('\n Std Dev = %s',std);
-%fprintf('\n');
 
 d=truncnormrnd(N,mu,std,dLo,dHi);

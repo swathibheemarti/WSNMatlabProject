@@ -8,7 +8,7 @@ figure;
 for i = 1:laps
     plot(ALL(:,1,i),ALL(:,2,i),'.');
     hold on;
-    plot(ALL(S(i,find(S(i,:))), 1, i),ALL(S(i,find(S(i,:))), 2, i),'r.');
+    plot(ALL(S(i),1,i),ALL(S(i),2,i),'r.');
     xlabel('X - Location');
     ylabel('Y - Location');
     grid on;

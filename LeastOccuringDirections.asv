@@ -25,9 +25,14 @@ NUD1 = sortrows(NUD, 2);
 
 if length(NUD1) > 2
     LUD = NUD1([1,2,3], 2);
-elseif length(NUD1) > 1
+elseif
+end
+
+if length(NUD1) > 1
     LUD = NUD1([1,2], 2);
-else
+end
+
+if length(NUD1) > 1
     LUD = NUD1(1, 2);
 end
 
