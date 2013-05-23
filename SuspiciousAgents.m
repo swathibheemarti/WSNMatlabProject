@@ -10,7 +10,7 @@ LUD = LeastOccuringDirections(A);
 j = 1;
 y = 0;
 for i = 1:length(A)
-    if ismember(A(i, 3), LUS) == 1  || ismember(A(i, 4), LUD) == 1
+    if ismember(A(i, 3), LUS) == 1  && ismember(A(i, 4), LUD) == 1
         y(j) = i;
         j = j + 1;
     end

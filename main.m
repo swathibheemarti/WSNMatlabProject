@@ -13,7 +13,6 @@ FA = GetAgents(cntAgents, side);
 
 %populate third dimension of ALL with first generated array of agents
 ALL(:,:,1) = FA;
-%get suspicious agents from first generated array of agents
 
 lapi = 1;
 S = zeros(lap, cntAgents);
@@ -40,18 +39,18 @@ for i = 2:lap
     %needed for populating CA
     PA = ALL(:,:,i-1);
     
-    %New agent locaton (x1,y1) is (x + s * t * cos(d), y + s * t * sin(d))
+    %New agent locaton (x1,y1) is (x + s * t * cosd(d), y + s * t * sind(d))
     %where s is speed (3.5 to 4.5)  t is time interval which is 1, and d is the
     %direction  (0 to 360)
     %x1 = x + st*cos(d), y1 = y+st*sin(d)
     for j = 1:cntAgents
         
         if j <= round(cntAgents/2)
-            CA(j, 1) = PA(j, 1) + round(PA(j, 3) * 1 * cos(PA(j, 4)));
-            CA(j, 2) = PA(j, 2) + round(PA(j, 3) * 1 * sin(PA(j, 4)));
+            CA(j, 1) = PA(j, 1) + round(PA(j, 3) * 1 * cosd(PA(j, 4)));
+            CA(j, 2) = PA(j, 2) + round(PA(j, 3) * 1 * sind(PA(j, 4)));
         else
-            CA(j, 1) = PA(j, 1) - round(PA(j, 3) * 1 * cos(PA(j, 4)));
-            CA(j, 2) = PA(j, 2) - round(PA(j, 3) * 1 * sin(PA(j, 4)));
+            CA(j, 1) = PA(j, 1) - round(PA(j, 3) * 1 * cosd(PA(j, 4)));
+            CA(j, 2) = PA(j, 2) - round(PA(j, 3) * 1 * sind(PA(j, 4)));
         end 
         
     end
@@ -74,7 +73,7 @@ DATA = ConvertAgentsToTwoDimArray(ALL, S, lap, cntAgents);
 %plot a graph for all the agents and mark the ordinary agents with blue 
 %and suspicious agents in red over time t = 1 to lap
 %BEGIN FIGURE 1
-%                                                PlotAllAgents(ALL, S, lap);
+PlotAllAgents(ALL, S, lap);
 %END FIGURE 1
 
 %plot a graph with all agents at t = 1, ordinary agents with blue and
